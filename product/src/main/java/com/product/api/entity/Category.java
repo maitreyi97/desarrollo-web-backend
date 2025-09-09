@@ -9,7 +9,7 @@ import jakarta.persistence.*;
 @Table(name="category")
 public class Category {
     @Id
-    private Integer id;
+    private Integer category_id;
     private String category;
     private String tag;
     private Integer status;
@@ -21,21 +21,24 @@ public class Category {
      * @param tag la etiqueta de la categoría
      * @param status el estado de la categoría
      */
-    public Category(Integer id, String category, String tag, Integer status) {
-        this.id = id;
+    public Category(Integer category_id, String category, String tag, Integer status) {
+        this.category_id = category_id;
         this.category = category;
         this.tag = tag;
         this.status = status;
     }
 
-    //Getters y setters de la clase Category
-    
-    public Integer getId() {
-        return id;
+    public Category() {
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    //Getters y setters de la clase Category
+    
+    public Integer getCategory_Id() {
+        return category_id;
+    }
+
+    public void setCategory_Id(Integer id) {
+        this.category_id = id;
     }
 
     public String getCategory() {
@@ -60,5 +63,10 @@ public class Category {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "[" +category_id +", " +category +", " +tag +", " +status+ "]";
     }
 }
