@@ -22,7 +22,7 @@ public class CtrlCategory {
      * @return Lista de categorías
      */
     @GetMapping
-    public List<Category> getCategories(){
+    public ResponseEntity<List<Category>> getCategories(){
         return svc.getCategories();
     }
 }
