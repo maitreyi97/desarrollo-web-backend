@@ -14,15 +14,10 @@ import jakarta.transaction.Transactional;
 @Repository
 public interface RepoCategory extends JpaRepository<Category, Integer> {
 
-    @Query(value = "SELECT * FROM category ORDER BY category_id", nativeQuery = true)
-    /**
-     * Método para obtener las categorías
-     * 
-     * @return Lista de categorías
-     */
+    @Query(value = "SELECT * FROM category ORDER BY category", nativeQuery = true)
     List<Category> findAll();
 
-    @Query(value = "SELECT * FROM category WHERE status = 1 ORDER BY category_id", nativeQuery = true)
+    @Query(value = "SELECT * FROM category WHERE status = 1 ORDER BY category", nativeQuery = true)
     List<Category> findActive();
 
     @Query(value = "SELECT * FROM category WHERE category = :category", nativeQuery = true)
@@ -36,15 +31,15 @@ public interface RepoCategory extends JpaRepository<Category, Integer> {
     @Modifying(clearAutomatically = true, flushAutomatically = true)
     @Transactional
     @Query(value = "UPDATE category SET category = :category, tag = :tag WHERE category_id = :id", nativeQuery = true)
-    void update(@Param("category") String category, @Param("tag") String tag, @Param("id") Integer id);
+    void update(@Param("category_id") String category, @Param("tag") String tag, @Param("id") Integer id);
 
     @Modifying(clearAutomatically = true, flushAutomatically = true)
     @Transactional
-    @Query(value = "UPDATE category SET status = 1 WHERE category_id = :id", nativeQuery = true)
+    @Query(value = "UPDATE category SET status = 1 WHERE category = :id", nativeQuery = true)
     void enable(@Param("id") Integer id);
 
     @Modifying(clearAutomatically = true, flushAutomatically = true)
     @Transactional
-    @Query(value = "UPDATE category SET status = 0 WHERE category_id = :id", nativeQuery = true)
+    @Query(value = "UPDATE category SET status = 0 WHERE category = :id", nativeQuery = true)
     void disable(@Param("id") Integer id);
 }
